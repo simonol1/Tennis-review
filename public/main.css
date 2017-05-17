@@ -1,0 +1,11 @@
+body {
+  background-color: #d9d9d9;
+}
+h1 {
+  font-size: 100px;
+  font-weight: bold;
+  font-family: 'helvetica';
+  text-align: center;
+  padding-top: 50px;
+  color:#737373;
+}
