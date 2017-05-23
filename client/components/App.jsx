@@ -1,10 +1,13 @@
 import React from 'react'
-import {HashRouter as Router} from 'react-router-dom'
+import {HashRouter as Router, Route} from 'react-router-dom'
 
+import Home from './Home'
 
 const App = () => {
   return (
-    <h1>Review My Tennis Match</h1>
+    <Router>
+      <Route path='/' component={Home}/>
+    </Router>
   )
 }
 
