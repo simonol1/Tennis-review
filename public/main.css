@@ -93,6 +93,6 @@ input {
 	margin-left: 15px;
 }
 
-button {
-
+a {
+	text-decoration: none;
 }

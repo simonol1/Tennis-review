@@ -5,7 +5,7 @@
   "repository": "https://github.com/dev-academy-challenges/boilerplate-react-webpack.git",
   "main": "server/index.js",
   "scripts": {
-    "knex":"knex",
+    "knex": "knex",
     "start": "nodemon --watch server server/index & webpack --watch",
     "test": "ava -v babel-register 'test/**/*.test.js' ",
     "watch": "nodemon -e js,jsx -x npm test"
@@ -13,7 +13,8 @@
   "babel": {
     "presets": [
       "es2015",
-      "react"
+      "react",
+      "stage-0"
     ]
   },
   "author": "EDA",
@@ -24,6 +25,7 @@
     "babel-loader": "^6.2.10",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.18.0",
     "enzyme": "^2.7.0",
     "jsx-loader": "^0.13.2",
