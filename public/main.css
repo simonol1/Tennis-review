@@ -16,20 +16,55 @@ h1 {
 
 }
 
-a {
-	color: #E36E40;	text-decoration: none;
+h1 a {
+	text-decoration: none;
 }
 
-a:hover {
-	color: #fff;
+h1 a:hover {
+	color: #E36E40;
 }
 
 body {
   background-color: #161819;
-  margin: 0 auto;
   text-align: center;
+	margin: 50px auto 0;
+	padding-top: 50px;
 }
 
 .home {
-  margin: 50vh;
+  margin: 30vh
+}
+
+.main-form {
+  margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	text-align: center;
+}
+
+input {
+	width: 600px;
+	box-sizing: border-box;
+	padding-left:10px;
+}
+
+#review-details {
+	padding-top: 15px;
+	padding-bottom: 300px;
+	width: 1220px;
+}
+
+.page2-header {
+	margin-top: 50px;
+}
+
+#left-column {
+	margin-right: 10px;
+}
+#right-column {
+	margin-left: 10px;
+}
+
+#container {
+	text-align: center;
 }

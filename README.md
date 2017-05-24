@@ -1,15 +1,26 @@
-# A starter webpack project for React
+# Review my tennis Match
 
-This is a starter project that uses webpack to transpile and bundle ES6 React code. To use, consider this approach:
+## MVP
+- A person can visit this web app and review a tennis players Match
 
-* Fork this repo
-* Rename your repo according to the app you're building
 
-```sh
-git clone https://github.com/dev-academy-challenges/[your-app].git
-cd [your-app] && npm install
-```
 
-To start the development server with a watcher that refreshes your browser, run `npm start`. The assets built by webpack are placed in `server/static`. This folder is defined as a static folder in an Express.js server that can be started with `npm run server`.
+## User Stories
+- I can write a review on a tennis players match for them to see
+- The review will be stored in an accessable database
+- Tennis players can log in and see reviews of their recent tennis matches
+- I can have a log in where my contact number is stored and reviewers can text me the review
 
-Additional components should be placed in `client/components`.
+
+## Method
+- Prepare file structure in react
+- Draw wire frames
+- Create home page
+- Create route to review page
+- Draw form for reviews
+- Build add function so that players can add their name and phone number
+- Build server-side Express
+- create tables for reviews
+- create tables for users
+- Research text message systems and implement
+- Research authentication options for log in
