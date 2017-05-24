@@ -9,8 +9,16 @@ const Home = () => {
   return (
     <div className='home'>
       <h1 className="main-heading"><Link to='/Reviews'>Review my Tennis Match</Link></h1>
-      <button>Find a review</button>
-      <button> Write a review</button>
+        <div className='row'>
+          <div className='four-columns'>
+            </div>
+              <div className='four-columns'>
+               <button className='button1'>Find a review</button>
+               <button className='button2'>Write a review</button>
+              </div>
+           <div className='four-columns'>
+         </div>
+      </div>
     </div>
   )
 }

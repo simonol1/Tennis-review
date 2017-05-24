@@ -14,7 +14,6 @@ h1 {
   padding-bottom: 5px;
   padding-left: 20px;
   padding-right: 20px;
-
 }
 
 h1 a {
@@ -60,6 +59,7 @@ input {
 
 .page2-header {
 	margin-top: 50px;
+	color: #E36E40;
 }
 
 #left-column {
@@ -83,10 +83,16 @@ input {
 
 /*buttons*/
 
-button {
-	display: block;
-	float: center;
-	text-align: center;
+.button1 {
+	margin-top: 40px;
+	margin-right:15px
+}
 
+.button2 {
+	margin-top:40px;
+	margin-left: 15px;
+}
+
+button {
 
 }

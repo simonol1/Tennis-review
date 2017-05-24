@@ -6,7 +6,7 @@ import ReviewForm from './ReviewForm'
 const Reviews= () => {
   return (
     <div>
-    <h1 className='page2-header'>Time to Review</h1>
+    <h1 className='page2-header'>Review a Match</h1>
     <ReviewForm />
     </div>
   )
