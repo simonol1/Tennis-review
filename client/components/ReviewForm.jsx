@@ -15,7 +15,7 @@ class ReviewForm extends React.Component {
       <input type='text' id='left-column'name='name' placeholder='Game score' />
       <input type='text' id='right-column' name='name' placeholder='Date' />
       <input type='text' id='review-details'name='name' placeholder='Your thoughts on the match' />
-      <input type='submit' value='Send' />
+      <input type='submit' id='submit' value='Submit' />
     </form>
   )
   }
