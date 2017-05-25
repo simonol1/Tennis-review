@@ -23,8 +23,6 @@ componentDidMount() {
 handleSubmit(evt) {
   evt.preventDefault()
   api.savePlayer(this.state.player, (err, player) => {
-    if (err) console.log({err});
-    console.log(player);
     if (!err) this.refreshForm()
     else throw(err)
   })
