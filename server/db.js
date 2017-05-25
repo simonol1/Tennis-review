@@ -16,8 +16,14 @@ var playerdetails = {
   mobile: ''
 }
 
+getReviews = (db) => {
+  return db('reviews')
+  .select()
+  .join('players', 'reviews.id', 'players_id')
+}
 
 module.exports = {
   getPlayers,
-  addPlayer
+  addPlayer,
+  getReviews
 }
