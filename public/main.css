@@ -37,24 +37,8 @@ body {
 
 /*form*/
 .main-form {
-  margin-left: auto;
-	margin-right: auto;
 	margin-top: 50px;
 	text-align: center;
-}
-
-input {
-	width: 600px;
-	box-sizing: border-box;
-	padding-left:10px;
-
-}
-
-#review-details {
-	padding-top: 15px;
-	padding-bottom: 300px;
-	width: 1220px;
-  border: 1px solid steelBlue;
 }
 
 .page2-header {
@@ -62,24 +46,11 @@ input {
 	color: #E36E40;
 }
 
-#left-column {
-	margin-right: 10px;
-}
-#right-column {
-	margin-left: 10px;
-}
 
 #container {
 	text-align: center;
 }
 
-#submit {
-	width: 200px;
-	display: block;
-	text-align: center;
-	margin-right: auto;
-	margin-left: auto;
-}
 
 /*buttons*/
 
@@ -95,4 +66,42 @@ input {
 
 a {
 	text-decoration: none;
+}
+
+/*form fields*/
+
+select {
+	text-align:center;
+	width: 40%;
+	margin-left: 40%;
+	margin-right: 30%;
+}
+
+#submit {
+	width: 20%;
+	display: block;
+	text-align: center;
+	margin-left: 30%;
+	margin-right: 30%;
+}
+
+input {
+	width: 40%;
+	box-sizing: border-box;
+	display: block;
+}
+
+#review-details {
+	padding-top: 15px;
+	padding-bottom: 300px;
+
+	width: 60%;
+  border: 1px solid steelBlue;
+	margin-left: 30%;
+	margin-right: 30%;
+}
+
+#column {
+	margin-left: 30%;
+	margin-right: 30%;
 }

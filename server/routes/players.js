@@ -8,26 +8,25 @@ router.get('/', (req, res) => {
     .then(players => {
       res.json(players)
     })
+    .catch(err => {
+      res.status(500).send(err)
+    })
 })
 
 router.post('/', (req, res) => {
-  const player = {
-    player: req.body.name,
-    email: req.body.email,
-    mobile: req.body.mobile
-  }
-  db.addPlayer(player)
+  console.log(req.body);
+  db.addPlayer(req.body, req.app.get('db'))
     .then(result => {
-      res.json(data)
+      res.status(302).json(result[0])
+    })
+    .catch(err => {
+      res.status(500).send(err)
     })
 })
 
 
 
+
+
+
 module.exports = router
-
-
-//what do you need to do to create a new player?
-//what is the db funciton?
-//what should be in the req.body?
-//what do I respond with? (it should be the id probablu)

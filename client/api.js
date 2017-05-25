@@ -3,9 +3,11 @@ import request from 'superagent'
 var reviewUrl = 'http://localhost:3000/api/v1/reviews'
 var playerUrl = 'http://localhost:3000/api/v1/players'
 
+
 module.exports = {
   getReviews: getReviews,
-  saveReview,
+  saveReview: saveReview,
+  savePlayer: savePlayer,
   getPlayers
 }
 
@@ -21,11 +23,23 @@ function getReviews(callback) {
     })
 }
 
+function saveReview(review, callback) {
+  request
+  .post(reviewUrl)
+  .send(review)
+  .end(function (err, res) {
+    if (err) {
+      callback(err)
+    } else {
+      callback(null, review)
+    }
+  })
+}
+
 function getPlayers (callback) {
   request
     .get(playerUrl)
     .end(function (err, res) {
-      console.log(res.body);
       if (err) {
         callback(err)
       } else {
@@ -34,14 +48,15 @@ function getPlayers (callback) {
     })
 }
 
-function saveReview(review, callback) {
+function savePlayer(player, callback) {
   request
-  .post(reviewUrl)
+  .post(playerUrl)
+  .send(player)
   .end(function (err, res) {
     if (err) {
       callback(err)
     } else {
-      callback(null, review)
+      callback(null, player)
     }
   })
 }

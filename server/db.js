@@ -3,27 +3,27 @@ getPlayers = (db) => {
   return db('players')
 }
 
-addPlayer = (db) => {
-  return db('player').insert(playerdetails)
-    .then((result) => {
-      return result
-    })
-}
-
-var playerdetails = {
-  name: '',
-  email: '',
-  mobile: ''
+addPlayer = (player, db) => {
+  return db('players').insert(player)
 }
 
 getReviews = (db) => {
   return db('reviews')
-  .select()
-  .join('players', 'reviews.id', 'players_id')
+}
+
+addReview = (review, db) => {
+  return db('review').insert(review)
+}
+
+getReviewsByPlayerId = (id, db) => {
+  return db('players').select()
+  .join('reviews', 'player.id', '=', 'player_id')
+  .where('players.id', id)
 }
 
 module.exports = {
   getPlayers,
   addPlayer,
-  getReviews
+  getReviews,
+  addReview
 }
