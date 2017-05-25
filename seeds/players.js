@@ -2,7 +2,7 @@ exports.seed = function (knex, Promise) {
   return knex('players').del()
     .then(function () {
       return Promise.all([
-        knex('players').insert({id: 1, name: 'Simon', email: 'simon@simon.com', Mobile: 02734493339, Review:'Good game to watch. Keep working on your serve!'})
+        knex('players').insert({id: 1, name: 'Simon', email: 'simon@simon.com', Mobile: 02734493339})
       ]);
     });
 };

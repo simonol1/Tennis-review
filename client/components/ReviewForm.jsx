@@ -26,7 +26,6 @@ saveReview (player) {
   let players = this.state.players
   players.push(player)
   this.setState({players})
-  // this.props.location
 }
 
 componentDidMount() {
@@ -35,10 +34,6 @@ componentDidMount() {
     console.log(this.state);
   })
 }
-
-
-//call save review
-//location -- react router. this.props.location = google for react touter set location redirect
 
   handleChange(evt) {
     console.log(evt.target.name, evt.target.value)
