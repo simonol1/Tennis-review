@@ -6,9 +6,10 @@
   "main": "server/index.js",
   "scripts": {
     "knex": "knex",
-    "start": "nodemon --watch server server/index & webpack --watch",
+    "dev": "nodemon --watch server server/index & webpack --watch",
     "test": "ava -v babel-register 'test/**/*.test.js' ",
-    "watch": "nodemon -e js,jsx -x npm test"
+    "watch": "nodemon -e js,jsx -x npm test",
+    "start": "node server/index"
   },
   "babel": {
     "presets": [
