@@ -7,7 +7,7 @@ var playerUrl = 'http://localhost:3000/api/v1/players'
 module.exports = {
   getReviews: getReviews,
   saveReview: saveReview,
-  savePlayer: savePlayer,
+  addPlayer: addPlayer,
   getPlayers
 }
 
@@ -48,7 +48,7 @@ function getPlayers (callback) {
     })
 }
 
-function savePlayer(player, callback) {
+function addPlayer(player, callback) {
   request
   .post(playerUrl)
   .send(player)

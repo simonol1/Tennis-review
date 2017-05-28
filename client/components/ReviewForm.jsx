@@ -1,6 +1,7 @@
 import React from 'react'
 
 import api from '../api'
+import PlayerForm from './PlayerForm'
 
 class ReviewForm extends React.Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class ReviewForm extends React.Component {
         Opponent:'',
         Score:'',
         Reviewer:'',
-        Content:'',
+        Content:''
       },
     review: []
   }
@@ -40,6 +41,8 @@ handleChange(evt) {
   review[evt.target.name] = evt.target.value
   this.setState({review})
 }
+
+
 
   render () {
     return (

@@ -39,6 +39,13 @@ handleChange(evt) {
   this.setState({player})
 }
 
+
+addPlayer (e) {
+  e.preventDefault()
+  const test = this.state
+  api.appendPlayer(test, this.props.finishAdd)
+}
+
 renderPlayerOptions() {
   return this.state.players.map((player,i) => {
     return <option key={i} value={player.name}>{player.name}</option>
@@ -47,14 +54,17 @@ renderPlayerOptions() {
 
   render () {
     return (
-    <form className = 'main-form' onSubmit={(evt) => this.handleSubmit(evt)}>
-      <select onChange={evt => this.handleChange(evt)}>
-         {this.renderPlayerOptions()}
-      </select>
-      <input type='email'id='column' name='email' placeholder='Email' onChange={this.handleChange.bind(this)}/>
-      <input type='tel' id='column' name='mobile' placeholder='Mobile number' onChange={this.handleChange.bind(this)}/>
-      <input type='submit' id='submit' value='Submit'/>
+      <div className="add-test">
+          <form>
+          <select onChange={evt => this.handleChange(evt)}>
+             {this.renderPlayerOptions()}
+             </select>
+             <input type='text' id='column'name='name' placeholder='Email' onChange={this.handleChange.bind(this)}/>
+             <input type='text' id='column'name='name' placeholder='Mobile' onChange={this.handleChange.bind(this)}/>
+              <button onClick={e => this.addPlayer(e)}>Add Player</button> {' '}
+                  <a href="#" onClick={this.props.finishAdd}>Cancel</a>
     </form>
+    </div>
   )}
 }
 
