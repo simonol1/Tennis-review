@@ -19,9 +19,13 @@ class ReviewForm extends React.Component {
 componentDidMount() {
   api.getReviews((err, reviews) => {
     this.setState({reviews})
-  })
+    })
 }
-
+componentDidMount() {
+  api.getPlayers((err, players) => {
+    this.setState({players})
+    })
+}
 handleSubmit(evt) {
   evt.preventDefault()
   api.saveReview(this.state.review, (err, review) => {
@@ -42,15 +46,22 @@ handleChange(evt) {
   this.setState({review})
 }
 
-
-
+// renderPlayerOptions() {
+//   return this.state.players.map((player,i) => {
+//     return <option key={i} value={player.name}>{player.name}</option>
+//   })
+// }
+// <select onChange={evt => this.handleChange(evt)}>
+//    {this.renderPlayerOptions()}
+//    </select>
   render () {
     return (
     <form className = 'main-form' onSubmit={(evt) => this.handleSubmit(evt)}>
+      <input type='text' id='column'name='name' placeholder='Player name' onChange={this.handleChange.bind(this)}/>
       <input type='text' id='column'name='name' placeholder='Opponents name' onChange={this.handleChange.bind(this)}/>
       <input type='text' id='column'name='name' placeholder='Game score' onChange={this.handleChange.bind(this)}/>
       <input type='text' id='column' name='name' placeholder='Date' onChange={this.handleChange.bind(this)}/>
-      <input type='text' id='review-details'name='name' placeholder='Review' onChange={this.handleChange.bind(this)}/>
+      <textarea type='text' id='review-details' name='name' placeholder='Review' onChange={this.handleChange.bind(this)}></textarea>
       <input type='submit' id='submit' value='Submit'/>
     </form>
   )}

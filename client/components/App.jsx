@@ -6,7 +6,16 @@ import Reviews from './Reviews'
 import OldReviews from './OldReviews'
 
 
-const App = () => {
+export default class App extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      error: null,
+      players: [],
+    }
+  }
+
+render() {
   return (
     <Router>
       <div>
@@ -15,7 +24,5 @@ const App = () => {
         <Route path='/oldreviews' component={OldReviews}/>
       </div>
     </Router>
-  )
+  )}
 }
-
-export default App

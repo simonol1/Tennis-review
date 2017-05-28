@@ -2,10 +2,11 @@ import React from 'react'
 
 import api from '../api'
 
-class PlayerForm extends React.Component {
+export default class PlayerForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      addPlayerVisible: false,
       player: {
         name: '',
         email: '',
@@ -20,6 +21,12 @@ componentDidMount() {
   })
 }
 
+componentWillReceiveProps(nextProps, nextState) {
+  if (this.state != nextProps.player) {
+    this.setState({...nextProps.player})
+  }
+}
+
 handleSubmit(evt) {
   evt.preventDefault()
   api.savePlayer(this.state.player, (err, player) => {
@@ -27,47 +34,24 @@ handleSubmit(evt) {
     else throw(err)
   })
 }
-refreshForm() {
-  api.getPlayer((players) => {
-    this.setState({players})
-  })
-}
 
 handleChange(evt) {
-  let player = {...this.state.player}
-  player[evt.target.name] = evt.target.value
-  this.setState({player})
-}
-
-
-addPlayer (e) {
-  e.preventDefault()
-  const test = this.state
-  api.appendPlayer(test, this.props.finishAdd)
-}
-
-renderPlayerOptions() {
-  return this.state.players.map((player,i) => {
-    return <option key={i} value={player.name}>{player.name}</option>
+  evt.preventDefault()
+  this.setState({
+    [evt.target.name]: evt.target.value
   })
 }
 
   render () {
+    console.log(this.state);
     return (
-      <div className="add-test">
-          <form>
-          <select onChange={evt => this.handleChange(evt)}>
-             {this.renderPlayerOptions()}
-             </select>
+      <div className="add-player">
+        <form>
+             <input type='text' id='column'name='name' placeholder='Name' onChange={this.handleChange.bind(this)}/>
              <input type='text' id='column'name='name' placeholder='Email' onChange={this.handleChange.bind(this)}/>
              <input type='text' id='column'name='name' placeholder='Mobile' onChange={this.handleChange.bind(this)}/>
-              <button onClick={e => this.addPlayer(e)}>Add Player</button> {' '}
-                  <a href="#" onClick={this.props.finishAdd}>Cancel</a>
-    </form>
+             <input type='submit' id='submit' value='Submit'/>
+        </form>
     </div>
   )}
 }
-
-
-
-export default PlayerForm
