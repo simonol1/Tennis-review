@@ -16,11 +16,11 @@ componentDidMount() {
     this.setState({reviews})
     })
 }
-render ()
+render () {
   return (
     <div>
     <h1 className='page2-header'>Find a Review</h1>
     <Reviews />
     </div>
-  )
+  )}
 }

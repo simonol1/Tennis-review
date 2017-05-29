@@ -7,11 +7,11 @@
   "scripts": {
     "start": "node server/index.js",
     "knex": "knex",
-    "debug": "nodemon --watch server server/index & webpack --watch",
+    "start": "nodemon --watch server server/index & webpack --watch",
     "test": "ava -v babel-register 'test/**/*.test.js' ",
-    "watch": "nodemon -e js,jsx -x npm test",
-    "start": "node server/index.js"
+    "watch": "nodemon -e js,jsx -x npm test"
   },
+  
   "babel": {
     "presets": [
       "es2015",

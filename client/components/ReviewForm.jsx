@@ -8,8 +8,7 @@ class ReviewForm extends React.Component {
     super(props)
     this.state = {
       players: {
-      players: [],
-      player.id: null
+      players: []
     },
       review: {
       Opponent:'',
