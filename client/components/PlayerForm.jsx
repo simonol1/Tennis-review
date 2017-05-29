@@ -30,6 +30,7 @@ componentWillReceiveProps(nextProps, nextState) {
 handleSubmit(evt) {
   evt.preventDefault()
   api.savePlayer(this.state.player, (err, player) => {
+    if (err) console.log({err});
     if (!err) this.refreshForm()
     else throw(err)
   })
@@ -43,10 +44,10 @@ handleChange(evt) {
 }
 
   render () {
-    console.log(this.state);
+
     return (
       <div className="add-player">
-        <form>
+        <form className = 'player-form' onSubmit={(evt) => this.handleSubmit(evt)}>
              <input type='text' id='column'name='name' placeholder='Name' onChange={this.handleChange.bind(this)}/>
              <input type='text' id='column'name='name' placeholder='Email' onChange={this.handleChange.bind(this)}/>
              <input type='text' id='column'name='name' placeholder='Mobile' onChange={this.handleChange.bind(this)}/>

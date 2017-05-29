@@ -13,6 +13,14 @@ export default class Reviews extends React.Component {
       addPlayerVisible: false
     }
   }
+
+
+  componentDidMount() {
+    api.getReviews((err, reviews) => {
+    this.setState({reviews})
+      })
+ }
+
   showAddPlayer () {
     this.setState({
       addPlayerVisible: true
@@ -41,6 +49,7 @@ export default class Reviews extends React.Component {
       else throw(err)
     })
   }
+
 
 render () {
   return (
