@@ -41,7 +41,7 @@ export default class Reviews extends React.Component {
 
   refreshForm() {
     api.getReviews((err, reviews) => {
-      api.getPlayer((players) => {
+      api.getPlayers((err, players) => {
         this.setState({players, reviews})
         console.log(this.state);
       })

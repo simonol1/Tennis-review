@@ -25,7 +25,7 @@ h1 a:hover {
 
 body {
   background-color: #161819;
-	/*background-image: url('http://www.mateflex.com/assets/Courts/_resampled/CroppedImage1200533-Web7.jpg');
+	/*background-image: url('http://www.mateflex.com/assets/Courts/_resampled/CroppedImage1200533-Web7.jpg);opacity:0.5;
 	background-repeat: no-repeat;
 	background-size: 100%;*/
   text-align: center;
@@ -94,8 +94,11 @@ select {
 	margin-top: 100px;
 }
 
-#cancel {
-	padding-left: 10px;
+#cancelreview {
+	margin-right:180px;
+}
+#cancelplayer {
+	margin-right: 100px;
 }
 
 input {

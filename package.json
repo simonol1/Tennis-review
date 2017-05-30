@@ -8,10 +8,10 @@
     "start": "node server/index.js",
     "knex": "knex",
     "start": "nodemon --watch server server/index & webpack --watch",
-    "test": "ava -v babel-register 'test/**/*.test.js' ",
+    "test": "ava -v babel-register 'tests/**/*.test.js' ",
     "watch": "nodemon -e js,jsx -x npm test"
   },
-  
+
   "babel": {
     "presets": [
       "es2015",
