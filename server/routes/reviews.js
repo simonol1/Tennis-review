@@ -17,9 +17,11 @@ router.post('/', (req, res) => {
   console.log(req.body);
   db.addReview(req.body, req.app.get('db'))
     .then(result => {
+      console.log({result});
       res.status(302).json(result[0])
     })
     .catch(err => {
+      console.log({err});
       res.status(500).send(err)
     })
 })

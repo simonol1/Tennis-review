@@ -6,7 +6,7 @@ var playerUrl = 'http://localhost:3000/api/v1/players'
 
 module.exports = {
   getReviews: getReviews,
-  saveReview: saveReview,
+  addReview: addReview,
   addPlayer: addPlayer,
   getPlayers
 }
@@ -23,16 +23,13 @@ function getReviews(callback) {
     })
 }
 
-function saveReview(review, callback) {
+function addReview(review, callback) {
   request
   .post(reviewUrl)
   .send(review)
   .end(function (err, res) {
-    if (err) {
-      callback(err)
-    } else {
-      callback(null, review)
-    }
+    console.log({err, res});
+      callback(null, res.body)
   })
 }
 
@@ -43,7 +40,8 @@ function getPlayers (callback) {
       if (err) {
         callback(err)
       } else {
-        callback(null, res.body)
+        console.log(res.body);
+        callback(null, res.body || [])
       }
     })
 }

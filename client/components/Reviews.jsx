@@ -10,7 +10,7 @@ export default class Reviews extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      reviews: [],
+      players: [],
       addPlayerVisible: false
     }
   }
@@ -18,8 +18,10 @@ export default class Reviews extends React.Component {
 
   componentDidMount() {
     api.getReviews((err, reviews) => {
-    this.setState({reviews})
+      api.getPlayers((err, players) => {
+        this.setState({players, reviews})
       })
+    })
  }
 
   showAddPlayer () {
@@ -38,13 +40,16 @@ export default class Reviews extends React.Component {
   }
 
   refreshForm() {
-    api.getPlayer((players) => {
-      this.setState({players})
+    api.getReviews((err, reviews) => {
+      api.getPlayer((players) => {
+        this.setState({players, reviews})
+        console.log(this.state);
+      })
     })
   }
   handleSubmit(evt) {
     evt.preventDefault()
-    api.saveReview(this.state.review, (err, review) => {
+    api.addReview(this.state.review, (err, review) => {
       if (err) console.log({err});
       if (!err) this.refreshForm()
       else throw(err)
@@ -55,17 +60,15 @@ export default class Reviews extends React.Component {
 render () {
   return (
     <div className="row">
-      <div className="six columns">
+       <div className="six columns">
         {this.state.addPlayerVisible && <PlayerForm submitCallback={this.addPlayer.bind(this)}
-        cancelCallback={this.hideAddPlayer.bind(this)}
-        />} <button id='addplayerbutton' onClick={e => this.showAddPlayer(e)}>Add Player</button> {' '}
-        <a href="#" id='cancel' onClick={this.props.cancelCallback}>Cancel</a>
-          <ReviewForm onSubmit={(evt) => this.handleSubmit(evt)}/>
+        cancelCallback={this.hideAddPlayer.bind(this)}/>}
+        <button id='addplayerbutton' onClick={e => this.showAddPlayer(e)}>Add Player</button> {' '}
+        <ReviewForm players={this.state.players} onSubmit={(evt) => this.handleSubmit(evt)}/>
+       </div>
+      <div className="six columns">
+        <h1 className='page2-header'>Review a Match</h1>
       </div>
-        <div className="six columns">
-          <h1 className='page2-header'>Review a Match</h1>
-      </div>
-
-  </div>
-)}
+   </div>
+  )}
 }

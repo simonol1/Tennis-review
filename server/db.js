@@ -12,7 +12,7 @@ getReviews = (db) => {
 }
 
 addReview = (review, db) => {
-  return db('review').insert(review)
+  return db('reviews').insert(review)
 }
 
 getReviewsByPlayerId = (id, db) => {

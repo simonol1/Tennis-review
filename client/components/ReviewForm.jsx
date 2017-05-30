@@ -3,35 +3,22 @@ import React from 'react'
 import api from '../api'
 import PlayerForm from './PlayerForm'
 
-class ReviewForm extends React.Component {
+export default class ReviewForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      players: {
-      players: []
-    },
-      review: {
-      Opponent:'',
-      Score:'',
-      Reviewer:'',
-      Content:''
-      },
-    review: []
+        player_id: null,
+        opponent:null,
+        score:null,
+        content:null
     }
   }
 
-    componentDidMount() {
-      api.getPlayers((err, players) => {
-        this.setState({players})
-        })
-    }
-
     handleSubmit(evt) {
       evt.preventDefault()
-      api.saveReview(this.state.review, (err, review) => {
-        if (err) console.log({err});
-        if (!err) this.refreshForm()
-        else throw(err)
+      api.addReview(this.state, (err, review) => {
+        if (err) console.log({err, review});
+        else this.refreshForm()
       })
     }
 
@@ -48,25 +35,26 @@ class ReviewForm extends React.Component {
       })
     }
 
-    renderPlayerOptions() {
-      console.log(this.state);
-      return this.state.players.map((player,i) => {
-        return <option key={i} value={player.name}>{player.name}</option>
+    renderPlayerOptions(players) {
+      return players.map((player,i) => {
+        return <option key={i} value={player.id}>{player.name}</option>
       })
     }
 
   render () {
+    console.log(this.state);
+    console.log(this.props);
     return (
     <form className = 'main-form' onSubmit={(evt) => this.handleSubmit(evt)}>
-      <select onChange={evt => this.handleChange(evt)}>
-         {this.renderPlayerOptions()}
+      <select name="player_id" onChange={evt => this.handleChange(evt)}>
+          <option selected disabled>Pick a player</option>
+         {this.renderPlayerOptions(this.props.players)}
       </select>
-      <input type='text' id='column'name='name' placeholder='Player name' onChange={this.handleChange.bind(this)}/>
-      <input type='text' id='column'name='name' placeholder='Opponents name' onChange={this.handleChange.bind(this)}/>
-      <input type='text' id='column'name='name' placeholder='Game score' onChange={this.handleChange.bind(this)}/>
-      <input type='text' id='column' name='name' placeholder='Date' onChange={this.handleChange.bind(this)}/>
-      <textarea type='text' id='review-details' name='name' placeholder='Review' onChange={this.handleChange.bind(this)}></textarea>
+      <input type='text' id='column'name='opponent' placeholder='Opponents name' onChange={this.handleChange.bind(this)}/>
+      <input type='text' id='column'name='score' placeholder='Game score' onChange={this.handleChange.bind(this)}/>
+      <textarea type='text' id='review-details' name='content' placeholder='Review' onChange={this.handleChange.bind(this)}></textarea>
       <input type='submit' id='submit' value='Submit'/>
+      <a href="#" id='cancel' onClick={this.props.cancelCallback}>Cancel</a>
     </form>
   )}
 }

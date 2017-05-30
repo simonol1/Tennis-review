@@ -12,7 +12,7 @@ export default class PlayerForm extends React.Component {
         email: '',
         mobile: ''
       },
-    players: []
+      players: []
   }
 }
 componentDidMount() {
@@ -29,7 +29,7 @@ componentWillReceiveProps(nextProps, nextState) {
 
 handleSubmit(evt) {
   evt.preventDefault()
-  api.savePlayer(this.state.player, (err, player) => {
+  api.addPlayer(this.state.player, (err, player) => {
     if (err) console.log({err});
     if (!err) this.refreshForm()
     else throw(err)
@@ -52,6 +52,7 @@ handleChange(evt) {
              <input type='text' id='column'name='name' placeholder='Email' onChange={this.handleChange.bind(this)}/>
              <input type='text' id='column'name='name' placeholder='Mobile' onChange={this.handleChange.bind(this)}/>
              <input type='submit' id='submit' value='Submit'/>
+             <a href="#" id='cancel' onClick={this.props.cancelCallback}>Cancel</a>
         </form>
     </div>
   )}

@@ -3,6 +3,7 @@ import test from 'ava'
 import request from 'supertest'
 
 import app from '../../server/server'
+
 var setupDb = require('./setup-db')
 
 setupDb(test, function(db) {
