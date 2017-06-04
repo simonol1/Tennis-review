@@ -2,6 +2,7 @@ import React from 'react'
 
 import ReviewForm from './ReviewForm'
 import PlayerForm from './PlayerForm'
+import {Link} from 'react-router-dom'
 
 import api from '../api'
 
@@ -39,24 +40,6 @@ export default class Reviews extends React.Component {
     this.setState({ addPlayerVisible: false})
   }
 
-  refreshForm() {
-    api.getReviews((err, reviews) => {
-      api.getPlayers((err, players) => {
-        this.setState({players, reviews})
-        console.log(this.state);
-      })
-    })
-  }
-  handleSubmit(evt) {
-    evt.preventDefault()
-    api.addReview(this.state.review, (err, review) => {
-      if (err) console.log({err});
-      if (!err) this.refreshForm()
-      else throw(err)
-    })
-  }
-
-
 render () {
   return (
     <div className="row">
@@ -68,6 +51,7 @@ render () {
        </div>
       <div className="six columns">
         <h1 className='page2-header'>Review a Match</h1>
+        <Link to='/'>Home</Link>
       </div>
    </div>
   )}

@@ -4986,6 +4986,8 @@ var _PlayerForm = __webpack_require__(65);
 
 var _PlayerForm2 = _interopRequireDefault(_PlayerForm);
 
+var _reactRouterDom = __webpack_require__(59);
+
 var _api = __webpack_require__(30);
 
 var _api2 = _interopRequireDefault(_api);
@@ -5046,32 +5048,9 @@ var Reviews = function (_React$Component) {
       this.setState({ addPlayerVisible: false });
     }
   }, {
-    key: 'refreshForm',
-    value: function refreshForm() {
-      var _this4 = this;
-
-      _api2.default.getReviews(function (err, reviews) {
-        _api2.default.getPlayers(function (err, players) {
-          _this4.setState({ players: players, reviews: reviews });
-          console.log(_this4.state);
-        });
-      });
-    }
-  }, {
-    key: 'handleSubmit',
-    value: function handleSubmit(evt) {
-      var _this5 = this;
-
-      evt.preventDefault();
-      _api2.default.addReview(this.state.review, function (err, review) {
-        if (err) console.log({ err: err });
-        if (!err) _this5.refreshForm();else throw err;
-      });
-    }
-  }, {
     key: 'render',
     value: function render() {
-      var _this6 = this;
+      var _this4 = this;
 
       return _react2.default.createElement(
         'div',
@@ -5084,14 +5063,14 @@ var Reviews = function (_React$Component) {
           _react2.default.createElement(
             'button',
             { id: 'addplayerbutton', onClick: function onClick(e) {
-                return _this6.showAddPlayer(e);
+                return _this4.showAddPlayer(e);
               } },
             'Add Player'
           ),
           ' ',
           ' ',
           _react2.default.createElement(_ReviewForm2.default, { players: this.state.players, onSubmit: function onSubmit(evt) {
-              return _this6.handleSubmit(evt);
+              return _this4.handleSubmit(evt);
             } })
         ),
         _react2.default.createElement(
@@ -5101,6 +5080,11 @@ var Reviews = function (_React$Component) {
             'h1',
             { className: 'page2-header' },
             'Review a Match'
+          ),
+          _react2.default.createElement(
+            _reactRouterDom.Link,
+            { to: '/' },
+            'Home'
           )
         )
       );
@@ -7636,8 +7620,6 @@ var _api2 = _interopRequireDefault(_api);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -7655,52 +7637,33 @@ var PlayerForm = function (_React$Component) {
     _this.state = {
       addPlayerVisible: false,
       player: {
-        name: '',
-        email: '',
-        mobile: ''
-      },
-      players: []
+        name: {},
+        email: {},
+        mobile: {}
+      }
     };
     return _this;
   }
 
   _createClass(PlayerForm, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      _api2.default.getPlayers(function (err, players) {
-        _this2.setState({ players: players });
-      });
-    }
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps, nextState) {
-      if (this.state != nextProps.player) {
-        this.setState(_extends({}, nextProps.player));
-      }
-    }
-  }, {
     key: 'handleSubmit',
     value: function handleSubmit(evt) {
-      var _this3 = this;
-
       evt.preventDefault();
       _api2.default.addPlayer(this.state.player, function (err, player) {
-        if (err) console.log({ err: err });
-        if (!err) _this3.refreshForm();else throw err;
+        window.location.reload(true);
       });
     }
   }, {
     key: 'handleChange',
     value: function handleChange(evt) {
-      evt.preventDefault();
-      this.setState(_defineProperty({}, evt.target.name, evt.target.value));
+      var player = _extends({}, this.state.player);
+      player[evt.target.name] = evt.target.value;
+      this.setState({ player: player });
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this4 = this;
+      var _this2 = this;
 
       return _react2.default.createElement(
         'div',
@@ -7708,11 +7671,11 @@ var PlayerForm = function (_React$Component) {
         _react2.default.createElement(
           'form',
           { className: 'player-form', onSubmit: function onSubmit(evt) {
-              return _this4.handleSubmit(evt);
+              return _this2.handleSubmit(evt);
             } },
           _react2.default.createElement('input', { type: 'text', id: 'column', name: 'name', placeholder: 'Name', onChange: this.handleChange.bind(this) }),
-          _react2.default.createElement('input', { type: 'text', id: 'column', name: 'name', placeholder: 'Email', onChange: this.handleChange.bind(this) }),
-          _react2.default.createElement('input', { type: 'text', id: 'column', name: 'name', placeholder: 'Mobile', onChange: this.handleChange.bind(this) }),
+          _react2.default.createElement('input', { type: 'text', id: 'column', name: 'email', placeholder: 'Email', onChange: this.handleChange.bind(this) }),
+          _react2.default.createElement('input', { type: 'text', id: 'column', name: 'mobile', placeholder: 'Mobile', onChange: this.handleChange.bind(this) }),
           _react2.default.createElement('input', { type: 'submit', id: 'submit', value: 'Submit' }),
           _react2.default.createElement(
             'a',
@@ -7773,10 +7736,10 @@ var ReviewForm = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (ReviewForm.__proto__ || Object.getPrototypeOf(ReviewForm)).call(this, props));
 
     _this.state = {
-      player_id: null,
-      opponent: null,
-      score: null,
-      content: null
+      player_id: {},
+      opponent: {},
+      score: {},
+      content: {}
     };
     return _this;
   }
@@ -7784,20 +7747,9 @@ var ReviewForm = function (_React$Component) {
   _createClass(ReviewForm, [{
     key: 'handleSubmit',
     value: function handleSubmit(evt) {
-      var _this2 = this;
-
       evt.preventDefault();
       _api2.default.addReview(this.state, function (err, review) {
-        if (err) console.log({ err: err, review: review });else _this2.refreshForm();
-      });
-    }
-  }, {
-    key: 'refreshForm',
-    value: function refreshForm() {
-      var _this3 = this;
-
-      _api2.default.getReviews(function (reviews) {
-        _this3.setState({ reviews: reviews });
+        window.location.reload(true);
       });
     }
   }, {
@@ -7820,19 +7772,17 @@ var ReviewForm = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this4 = this;
+      var _this2 = this;
 
-      console.log(this.state);
-      console.log(this.props);
       return _react2.default.createElement(
         'form',
         { className: 'main-form', onSubmit: function onSubmit(evt) {
-            return _this4.handleSubmit(evt);
+            return _this2.handleSubmit(evt);
           } },
         _react2.default.createElement(
           'select',
           { name: 'player_id', onChange: function onChange(evt) {
-              return _this4.handleChange(evt);
+              return _this2.handleChange(evt);
             } },
           _react2.default.createElement(
             'option',
@@ -11515,8 +11465,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
@@ -11531,46 +11479,25 @@ var _Reviews = __webpack_require__(39);
 
 var _Reviews2 = _interopRequireDefault(_Reviews);
 
-var _OldReviews = __webpack_require__(103);
+var _ReviewList = __webpack_require__(237);
 
-var _OldReviews2 = _interopRequireDefault(_OldReviews);
+var _ReviewList2 = _interopRequireDefault(_ReviewList);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var App = function (_React$Component) {
-  _inherits(App, _React$Component);
-
-  function App(props) {
-    _classCallCheck(this, App);
-
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
-  }
-
-  _createClass(App, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        _reactRouterDom.HashRouter,
-        null,
-        _react2.default.createElement(
-          'div',
-          null,
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/', exact: true, component: _Home2.default }),
-          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/reviews', className: 'reviews', component: _Reviews2.default }),
-          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/oldreviews', component: _OldReviews2.default })
-        )
-      );
-    }
-  }]);
-
-  return App;
-}(_react2.default.Component);
+var App = function App() {
+  return _react2.default.createElement(
+    _reactRouterDom.HashRouter,
+    null,
+    _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/', exact: true, component: _Home2.default }),
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/reviews', className: 'reviews', component: _Reviews2.default }),
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/reviewlist', component: _ReviewList2.default })
+    )
+  );
+};
 
 exports.default = App;
 
@@ -11632,7 +11559,7 @@ var Home = function Home() {
           { className: 'button1' },
           _react2.default.createElement(
             _reactRouterDom.Link,
-            { to: '/oldreviews' },
+            { to: '/reviewlist' },
             'Find a review'
           )
         ),
@@ -11654,90 +11581,7 @@ var Home = function Home() {
 exports.default = Home;
 
 /***/ }),
-/* 103 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(6);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _ReviewForm = __webpack_require__(66);
-
-var _ReviewForm2 = _interopRequireDefault(_ReviewForm);
-
-var _reactRouterDom = __webpack_require__(59);
-
-var _Reviews = __webpack_require__(39);
-
-var _Reviews2 = _interopRequireDefault(_Reviews);
-
-var _api = __webpack_require__(30);
-
-var api = _interopRequireWildcard(_api);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var OldReviews = function (_React$Component) {
-  _inherits(OldReviews, _React$Component);
-
-  function OldReviews(props) {
-    _classCallCheck(this, OldReviews);
-
-    var _this = _possibleConstructorReturn(this, (OldReviews.__proto__ || Object.getPrototypeOf(OldReviews)).call(this, props));
-
-    _this.state = {
-      reviews: []
-    };
-    return _this;
-  }
-
-  _createClass(OldReviews, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      api.getReviews(function (err, reviews) {
-        _this2.setState({ reviews: reviews });
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'h1',
-          { className: 'page2-header' },
-          'Find a Review'
-        )
-      );
-    }
-  }]);
-
-  return OldReviews;
-}(_react2.default.Component);
-
-exports.default = OldReviews;
-
-/***/ }),
+/* 103 */,
 /* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28015,6 +27859,104 @@ var valueEqual = function valueEqual(a, b) {
 };
 
 exports.default = valueEqual;
+
+/***/ }),
+/* 237 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(6);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ReviewForm = __webpack_require__(66);
+
+var _ReviewForm2 = _interopRequireDefault(_ReviewForm);
+
+var _reactRouterDom = __webpack_require__(59);
+
+var _Reviews = __webpack_require__(39);
+
+var _Reviews2 = _interopRequireDefault(_Reviews);
+
+var _api = __webpack_require__(30);
+
+var api = _interopRequireWildcard(_api);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ReviewList = function (_React$Component) {
+  _inherits(ReviewList, _React$Component);
+
+  function ReviewList(props) {
+    _classCallCheck(this, ReviewList);
+
+    var _this = _possibleConstructorReturn(this, (ReviewList.__proto__ || Object.getPrototypeOf(ReviewList)).call(this, props));
+
+    _this.state = {
+      reviews: []
+    };
+    return _this;
+  }
+
+  _createClass(ReviewList, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.getReviewList();
+    }
+  }, {
+    key: 'getReviewList',
+    value: function getReviewList() {
+      var _this2 = this;
+
+      api.getReviews(function (reviews, error) {
+        if (error) {
+          console.log(error);
+        } else {
+          _this2.setState({ reviews: reviews });
+        }
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: '/' },
+          'Home'
+        ),
+        _react2.default.createElement(
+          'h1',
+          { className: 'page2-header' },
+          'Find a Review'
+        )
+      );
+    }
+  }]);
+
+  return ReviewList;
+}(_react2.default.Component);
+
+exports.default = ReviewList;
 
 /***/ })
 /******/ ]);

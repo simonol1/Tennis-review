@@ -33,7 +33,7 @@ function addReview(review, callback) {
   })
 }
 
-function getPlayers (callback) {
+function getPlayers(callback) {
   request
     .get(playerUrl)
     .end(function (err, res) {

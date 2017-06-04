@@ -1,8 +1,12 @@
 
+
+.navbar {
+	background-color: blue;
+	height: 50px;
+}
 /*front page header*/
 
 h1 {
-	color: #8EF2FF;
 	font-family: 'Roboto Slab';
 	font-weight: 400;
 	line-height: 72px;
@@ -17,6 +21,7 @@ h1 {
 
 h1 a {
 	text-decoration: none;
+	color: steelBlue;
 }
 
 h1 a:hover {
@@ -24,7 +29,7 @@ h1 a:hover {
 }
 
 body {
-  background-color: #161819;
+  background-color: lightSteelBlue;
 	/*background-image: url('http://www.mateflex.com/assets/Courts/_resampled/CroppedImage1200533-Web7.jpg);opacity:0.5;
 	background-repeat: no-repeat;
 	background-size: 100%;*/
@@ -59,12 +64,14 @@ body {
 
 .button1 {
 	margin-top: 40px;
-	margin-right:15px
+	margin-right:15px;
+	border: 1px solid black;
 }
 
 .button2 {
 	margin-top:40px;
 	margin-left:15px;
+	border: 1px solid black;
 }
 
 a {
@@ -87,18 +94,22 @@ select {
 	display: inline-block;
 	margin-left: 30%;
 	margin-right: 30%;
+	border: 1px solid darkGrey;
 }
 
 #addplayerbutton {
 	width: 20%;
 	margin-top: 100px;
+	border: 1px solid darkGrey;
 }
 
 #cancelreview {
 	margin-right:180px;
+	border: 1px solid darkGrey;
 }
 #cancelplayer {
 	margin-right: 100px;
+	border: 1px solid darkGrey;
 }
 
 input {

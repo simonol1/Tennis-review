@@ -1,29 +1,31 @@
 
-getPlayers = (db) => {
-  return db('players')
-}
 
-addPlayer = (player, db) => {
+const addPlayer = (player, db) => {
   return db('players').insert(player)
 }
 
-getReviews = (db) => {
+const getReviews = (db) => {
   return db('reviews')
 }
 
-addReview = (review, db) => {
+const getPlayers = (db) => {
+  return db('players')
+}
+
+const addReview = (review, db) => {
   return db('reviews').insert(review)
 }
 
-getReviewsByPlayerId = (id, db) => {
+const getReviewsByPlayerId = (id, db) => {
   return db('players').select()
   .join('reviews', 'player.id', '=', 'player_id')
   .where('players.id', id)
 }
 
+
 module.exports = {
-  getPlayers,
   addPlayer,
+  getPlayers,
   getReviews,
   addReview
 }

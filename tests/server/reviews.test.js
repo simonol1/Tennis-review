@@ -3,6 +3,7 @@ import test from 'ava'
 import request from 'supertest'
 
 import app from '../../server/server'
+
 var setupDb = require('./setup-db')
 
 setupDb(test, function(db) {
@@ -11,7 +12,7 @@ setupDb(test, function(db) {
 
 test.serial.cb('GET /', t => {
   request(app)
-    .get('/reviews')
+    .get('/players')
     .expect(200)
     .end((err,res) => {
       t.is(res.body.length, 1)

@@ -3,23 +3,19 @@ import {HashRouter as Router, Route} from 'react-router-dom'
 
 import Home from './Home'
 import Reviews from './Reviews'
-import OldReviews from './OldReviews'
+import ReviewList from './ReviewList'
 
 
-export default class App extends React.Component {
-  constructor (props) {
-    super(props)
-
-  }
-
-render() {
+const App = () => {
   return (
     <Router>
       <div>
         <Route path='/' exact={true} component={Home}/>
         <Route exact path='/reviews' className='reviews' component={Reviews}/>
-        <Route exact path='/oldreviews' component={OldReviews}/>
+        <Route exact path='/reviewlist' component={ReviewList}/>
       </div>
     </Router>
-  )}
+  )
 }
+
+export default App
