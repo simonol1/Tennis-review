@@ -1,6 +1,6 @@
 
 var knex = require('knex')
-var config = require('../../../knexfile').test
+var config = require('../../knexfile').test
 
 module.exports = (test, createServer) => {
   // Create a separate in-memory database before each test.

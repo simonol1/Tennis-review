@@ -16,13 +16,6 @@ export default class ReviewForm extends React.Component {
     }
   }
 
-    handleSubmit(evt) {
-      evt.preventDefault()
-      api.addReview(this.state.review, (err, review) => {
-        window.location.reload(true)
-      })
-    }
-
 
     handleChange(evt) {
       let review = {...this.state.review}
@@ -38,7 +31,7 @@ export default class ReviewForm extends React.Component {
 
   render () {
     return (
-    <form className = 'main-form' onSubmit={(evt) => this.handleSubmit(evt)}>
+    <form className = 'main-form' onSubmit={(evt) => this.props.onSubmit(evt)}>
       <select name="player_id" onChange={evt => this.handleChange(evt)}>
           <option defaultValue>Pick a player</option>
          {this.renderPlayerOptions(this.props.players)}

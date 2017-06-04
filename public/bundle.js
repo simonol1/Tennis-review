@@ -5107,9 +5107,21 @@ var Reviews = function (_React$Component) {
       this.setState({ addPlayerVisible: false });
     }
   }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(evt) {
+      var _this4 = this;
+
+      evt.preventDefault();
+      console.log(this.props);
+      _api2.default.addReview(this.state.review, function (err, review) {
+        _this4.props.history.push('/reviewlist');
+        // window.location.reload(true)
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
       return _react2.default.createElement(
         'div',
@@ -5122,14 +5134,14 @@ var Reviews = function (_React$Component) {
           _react2.default.createElement(
             'button',
             { id: 'addplayerbutton', onClick: function onClick(e) {
-                return _this4.showAddPlayer(e);
+                return _this5.showAddPlayer(e);
               } },
             'Add Player'
           ),
           ' ',
           ' ',
           _react2.default.createElement(_ReviewForm2.default, { players: this.state.players, onSubmit: function onSubmit(evt) {
-              return _this4.handleSubmit(evt);
+              return _this5.handleSubmit(evt);
             } })
         ),
         _react2.default.createElement(
@@ -7747,14 +7759,6 @@ var ReviewForm = function (_React$Component) {
   }
 
   _createClass(ReviewForm, [{
-    key: 'handleSubmit',
-    value: function handleSubmit(evt) {
-      evt.preventDefault();
-      _api2.default.addReview(this.state.review, function (err, review) {
-        window.location.reload(true);
-      });
-    }
-  }, {
     key: 'handleChange',
     value: function handleChange(evt) {
       var review = _extends({}, this.state.review);
@@ -7780,7 +7784,7 @@ var ReviewForm = function (_React$Component) {
       return _react2.default.createElement(
         'form',
         { className: 'main-form', onSubmit: function onSubmit(evt) {
-            return _this2.handleSubmit(evt);
+            return _this2.props.onSubmit(evt);
           } },
         _react2.default.createElement(
           'select',
@@ -11648,16 +11652,42 @@ var ReviewList = function (_React$Component) {
     value: function getReviewList() {
       var _this2 = this;
 
-      api.getReviews(function (reviews) {
-        reviews.map(function (review) {
-          _this2.setState({ reviews: reviews });
-        });
-        // if(error) {
-        //   console.log(error);
-        // } else {
-        //   this.setState({reviews})
-        // }
+      api.getReviews(function (err, reviews) {
+        console.log({ reviews: reviews });
+        _this2.setState({ reviews: reviews });
       });
+    }
+  }, {
+    key: 'renderReview',
+    value: function renderReview(review) {
+      return _react2.default.createElement(
+        'li',
+        { className: 'review-list' },
+        _react2.default.createElement(
+          'h5',
+          { className: 'username' },
+          review.name,
+          ' V.S ',
+          review.opponent
+        ),
+        _react2.default.createElement(
+          'p',
+          { className: 'content' },
+          'Review: ',
+          review.content
+        ),
+        _react2.default.createElement(
+          'p',
+          { className: 'score' },
+          'Score: ',
+          review.score
+        )
+      );
+    }
+  }, {
+    key: 'renderReviews',
+    value: function renderReviews() {
+      return this.state.reviews.map(this.renderReview);
     }
   }, {
     key: 'render',
@@ -11674,6 +11704,11 @@ var ReviewList = function (_React$Component) {
           'h1',
           { className: 'page2-header' },
           'Find a Review'
+        ),
+        _react2.default.createElement(
+          'ul',
+          null,
+          this.renderReviews()
         )
       );
     }

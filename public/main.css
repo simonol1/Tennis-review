@@ -113,7 +113,7 @@ select {
 }
 
 input {
-	width: 40%;
+	width: 50%;
 	box-sizing: border-box;
 	display: inline-block;
 }
@@ -134,7 +134,13 @@ input {
 	margin-right: 30%;
 }
 
-
 .add-player {
 	margin: 150px;
+}
+
+/* reviewlist page*/
+
+.review-list {
+	text-align: left;
+	padding-left: 50px;
 }

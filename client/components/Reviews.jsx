@@ -40,6 +40,15 @@ export default class Reviews extends React.Component {
     this.setState({ addPlayerVisible: false})
   }
 
+  handleSubmit(evt) {
+    evt.preventDefault()
+    console.log(this.props);
+    api.addReview(this.state.review, (err, review) => {
+      this.props.history.push('/reviewlist')
+      // window.location.reload(true)
+    })
+  }
+
 render () {
   return (
     <div className="row">

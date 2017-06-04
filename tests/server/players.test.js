@@ -5,13 +5,11 @@ var createServer = require('../../server/server')
 
 var setupDb = require('./setup-db')
 
-setupDb(test, function(db) {
-  app.set('knex',db)
-})
+setupDb(test, createServer)
 
-test('GET /', t => {
-  request(app)
-    .get('/players')
+test.cb('GET /', t => {
+  request(t.context.app)
+    .get('/api/v1/players')
     .expect(200)
     .end((err,res) => {
       t.is(res.body.length, 1)

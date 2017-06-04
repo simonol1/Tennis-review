@@ -17,16 +17,22 @@ componentDidMount() {
 }
 
 getReviewList() {
-    api.getReviews((reviews) => {
-      reviews.map((review) => {
-        this.setState({reviews})
-      })
-      // if(error) {
-      //   console.log(error);
-      // } else {
-      //   this.setState({reviews})
-      // }
+    api.getReviews((err, reviews) => {
+      console.log({reviews});
+      this.setState({reviews})
     })
+}
+
+renderReview(review) {
+  return <li className="review-list">
+    <h5 className="username">{review.name} V.S {review.opponent}</h5>
+    <p className="content">Review: {review.content}</p>
+    <p className="score">Score: {review.score}</p>
+  </li>
+}
+
+renderReviews() {
+  return this.state.reviews.map(this.renderReview)
 }
 
 render () {
@@ -34,7 +40,9 @@ render () {
     <div>
       <Link to='/'>Home</Link>
       <h1 className='page2-header'>Find a Review</h1>
-
+      <ul>
+        {this.renderReviews()}
+      </ul>
     </div>
   )}
 }

@@ -14,7 +14,6 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  console.log(req.body);
   db.addReview(req.body, req.app.get('db'))
     .then(result => {
       console.log({result});
