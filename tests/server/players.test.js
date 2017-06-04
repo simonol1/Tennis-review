@@ -1,8 +1,7 @@
+var test = require('ava')
+var request = require('supertest')
 
-import test from 'ava'
-import request from 'supertest'
-
-import app from '../../server/server'
+var createServer = require('../../server/server')
 
 var setupDb = require('./setup-db')
 
@@ -10,7 +9,7 @@ setupDb(test, function(db) {
   app.set('knex',db)
 })
 
-test.serial.cb('GET /', t => {
+test('GET /', t => {
   request(app)
     .get('/players')
     .expect(200)

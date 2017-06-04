@@ -17,12 +17,15 @@ componentDidMount() {
 }
 
 getReviewList() {
-    api.getReviews((reviews, error) => {
-      if(error) {
-        console.log(error);
-      } else {
+    api.getReviews((reviews) => {
+      reviews.map((review) => {
         this.setState({reviews})
-      }
+      })
+      // if(error) {
+      //   console.log(error);
+      // } else {
+      //   this.setState({reviews})
+      // }
     })
 }
 
@@ -31,6 +34,7 @@ render () {
     <div>
       <Link to='/'>Home</Link>
       <h1 className='page2-header'>Find a Review</h1>
+
     </div>
   )}
 }

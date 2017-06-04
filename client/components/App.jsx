@@ -1,5 +1,5 @@
 import React from 'react'
-import {HashRouter as Router, Route} from 'react-router-dom'
+import {HashHistory, HashRouter as Router, Route} from 'react-router-dom'
 
 import Home from './Home'
 import Reviews from './Reviews'

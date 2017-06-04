@@ -7,26 +7,27 @@ export default class ReviewForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      review: {
         player_id: {},
         opponent:{},
         score:{},
         content:{}
+      }
     }
   }
 
     handleSubmit(evt) {
       evt.preventDefault()
-      api.addReview(this.state, (err, review) => {
+      api.addReview(this.state.review, (err, review) => {
         window.location.reload(true)
       })
     }
 
 
     handleChange(evt) {
-      evt.preventDefault()
-      this.setState({
-        [evt.target.name]: evt.target.value
-      })
+      let review = {...this.state.review}
+        review[evt.target.name] = evt.target.value
+        this.setState({review})
     }
 
     renderPlayerOptions(players) {
