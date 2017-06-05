@@ -16,7 +16,6 @@ export default class Reviews extends React.Component {
     }
   }
 
-
   componentDidMount() {
     api.getReviews((err, reviews) => {
       api.getPlayers((err, players) => {
@@ -60,10 +59,10 @@ render () {
     </div>
         <div className="row">
         <div className="six columns">
-          {this.state.addPlayerVisible && <PlayerForm submitCallback={this.addPlayer.bind(this)}
+          {this.state.addPlayerVisible && <PlayerForm onChange={this.handleChange.bind(this)} submitCallback={this.addPlayer.bind(this)}
           cancelCallback={this.hideAddPlayer.bind(this)}/>}
           <button id='addplayerbutton' onClick={e => this.showAddPlayer(e)}>Add Player</button> {' '}
-          <ReviewForm players={this.state.players} onSubmit={(evt, review) => this.handleSubmit(evt, review)}/>
+          <ReviewForm players={this.state.players} onChange={this.handleChange.bind(this)} onSubmit={(evt, review) => this.handleSubmit(evt, review)}/>
        </div>
       <div className="six columns">
         <h1 className='page2-header'>Review a Match</h1>
@@ -72,3 +71,12 @@ render () {
  </span>
   )}
 }
+
+function mapStateToProps(state) {
+  console.log(state);
+  return {
+    props:props.state
+  }
+}
+
+export default connect(mapStateToProps)(ReviewList)

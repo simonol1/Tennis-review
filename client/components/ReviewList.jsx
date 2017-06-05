@@ -35,7 +35,7 @@ renderReviews() {
 
 render () {
   return (
-    <span>      
+    <span>
     <div className='row'>
       <div className='twelve columns'>
         <Link className='home' to='/'>HOME</Link>
@@ -52,3 +52,12 @@ render () {
 </span>
   )}
 }
+
+function mapStateToProps(state) {
+  console.log(state);
+  return {
+    props:props.state
+  }
+}
+
+export default connect(mapStateToProps)(ReviewList)

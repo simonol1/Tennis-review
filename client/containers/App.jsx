@@ -11,12 +11,23 @@ const App = () => {
   return (
     <Router>
       <div>
+        <Nav/>
+        <Header/>
         <Route path='/' exact={true} component={Home}/>
         <Route exact path='/reviews' className='reviews' component={Reviews}/>
         <Route exact path='/reviewlist' component={ReviewList}/>
       </div>
+    <Footer?>
     </Router>
   )
 }
 
-export default App
+
+function mapStateToProps(state) {
+  console.log(state);
+  return {
+    props:props.state
+  }
+}
+
+export default connect(mapStateToProps)(App)

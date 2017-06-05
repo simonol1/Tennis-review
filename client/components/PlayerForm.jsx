@@ -2,18 +2,7 @@ import React from 'react'
 
 import api from '../api'
 
-export default class PlayerForm extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      addPlayerVisible: false,
-      player: {
-        name: {},
-        email: {},
-        mobile: {}
-      }
-    }
-}
+export default PlayerForm = (props) => {
 
   handleSubmit(evt) {
     evt.preventDefault()
