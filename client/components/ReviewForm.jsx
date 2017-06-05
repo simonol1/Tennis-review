@@ -8,10 +8,6 @@ export default class ReviewForm extends React.Component {
     super(props)
     this.state = {
       review: {
-        player_id: {},
-        opponent:{},
-        score:{},
-        content:{}
       }
     }
   }
@@ -31,7 +27,7 @@ export default class ReviewForm extends React.Component {
 
   render () {
     return (
-    <form className = 'main-form' onSubmit={(evt) => this.props.onSubmit(evt)}>
+    <form className = 'main-form' onSubmit={(evt) => this.props.onSubmit(evt, this.state.review)}>
       <select name="player_id" onChange={evt => this.handleChange(evt)}>
           <option defaultValue>Pick a player</option>
          {this.renderPlayerOptions(this.props.players)}

@@ -6,7 +6,8 @@ const addPlayer = (player, db) => {
 
 const getReviews = (db) => {
   return db('reviews')
-      .join('players', 'reviews.player_id', '=', 'players.id')
+  .join('players', 'reviews.player_id', '=', 'players.id')
+  .select('*')
 }
 
 const getPlayers = (db) => {

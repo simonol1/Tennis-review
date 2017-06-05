@@ -6,7 +6,7 @@ import Reviews from './Reviews'
 
 const Home = () => {
   return (
-    <div className='home'>
+    <div className='home-page'>
       <h1 className="main-heading"><Link to='/'>Review my Tennis Match</Link></h1>
         <div className='row'>
           <div className='four-columns'>

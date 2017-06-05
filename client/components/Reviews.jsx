@@ -40,28 +40,35 @@ export default class Reviews extends React.Component {
     this.setState({ addPlayerVisible: false})
   }
 
-  handleSubmit(evt) {
+  handleSubmit(evt, review) {
     evt.preventDefault()
-    console.log(this.props);
-    api.addReview(this.state.review, (err, review) => {
+    console.log("submitting review");
+    api.addReview(review, (err, response) => {
       this.props.history.push('/reviewlist')
       // window.location.reload(true)
+      console.log({response});
     })
   }
 
 render () {
   return (
+    <span>
     <div className="row">
-       <div className="six columns">
-        {this.state.addPlayerVisible && <PlayerForm submitCallback={this.addPlayer.bind(this)}
-        cancelCallback={this.hideAddPlayer.bind(this)}/>}
-        <button id='addplayerbutton' onClick={e => this.showAddPlayer(e)}>Add Player</button> {' '}
-        <ReviewForm players={this.state.players} onSubmit={(evt) => this.handleSubmit(evt)}/>
+      <div className="twelve columns">
+        <Link className='home' to='/'>HOME</Link>
+      </div>
+    </div>
+        <div className="row">
+        <div className="six columns">
+          {this.state.addPlayerVisible && <PlayerForm submitCallback={this.addPlayer.bind(this)}
+          cancelCallback={this.hideAddPlayer.bind(this)}/>}
+          <button id='addplayerbutton' onClick={e => this.showAddPlayer(e)}>Add Player</button> {' '}
+          <ReviewForm players={this.state.players} onSubmit={(evt, review) => this.handleSubmit(evt, review)}/>
        </div>
       <div className="six columns">
         <h1 className='page2-header'>Review a Match</h1>
-        <Link to='/'>Home</Link>
       </div>
    </div>
+ </span>
   )}
 }

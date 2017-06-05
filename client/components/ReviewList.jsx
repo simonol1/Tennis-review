@@ -1,7 +1,5 @@
 import React from 'react'
-import ReviewForm from './ReviewForm'
 import {Link} from 'react-router-dom'
-import Reviews from './Reviews'
 
 import * as api from '../api'
 
@@ -37,12 +35,20 @@ renderReviews() {
 
 render () {
   return (
-    <div>
-      <Link to='/'>Home</Link>
-      <h1 className='page2-header'>Find a Review</h1>
-      <ul>
-        {this.renderReviews()}
-      </ul>
+    <span>      
+    <div className='row'>
+      <div className='twelve columns'>
+        <Link className='home' to='/'>HOME</Link>
+      </div>
     </div>
+    <div className='row'>
+      <div className='twelve columns'>
+        <h1 className='page2-header'>Find a Review</h1>
+        <ul>
+          {this.renderReviews()}
+        </ul>
+    </div>
+  </div>
+</span>
   )}
 }

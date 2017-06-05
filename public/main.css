@@ -1,8 +1,15 @@
 
+.home {
+	color: black;
+	border: 2px solid white;
+	padding: 5px 15px 5px 15px;
+	text-align: left;
+	float: left;
+	margin-top: 5px;
+}
 
-.navbar {
-	background-color: blue;
-	height: 50px;
+twelve.columns {
+	padding: 10px;
 }
 /*front page header*/
 

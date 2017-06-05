@@ -3700,16 +3700,19 @@ module.exports = {
 };
 
 function getReviews(callback) {
+  console.log("get reviews");
   _superagent2.default.get(reviewUrl).end(function (err, res) {
     if (err) {
       callback(err);
     } else {
+      console.log("got reviews", res.body);
       callback(null, res.body);
     }
   });
 }
 
 function addReview(review, callback) {
+  console.log("add review", { review: review });
   _superagent2.default.post(reviewUrl).send(review).end(function (err, res) {
     console.log({ err: err, res: res });
     callback(null, res.body);
@@ -5108,14 +5111,15 @@ var Reviews = function (_React$Component) {
     }
   }, {
     key: 'handleSubmit',
-    value: function handleSubmit(evt) {
+    value: function handleSubmit(evt, review) {
       var _this4 = this;
 
       evt.preventDefault();
-      console.log(this.props);
-      _api2.default.addReview(this.state.review, function (err, review) {
+      console.log("submitting review");
+      _api2.default.addReview(review, function (err, response) {
         _this4.props.history.push('/reviewlist');
         // window.location.reload(true)
+        console.log({ response: response });
       });
     }
   }, {
@@ -5124,38 +5128,50 @@ var Reviews = function (_React$Component) {
       var _this5 = this;
 
       return _react2.default.createElement(
-        'div',
-        { className: 'row' },
+        'span',
+        null,
         _react2.default.createElement(
           'div',
-          { className: 'six columns' },
-          this.state.addPlayerVisible && _react2.default.createElement(_PlayerForm2.default, { submitCallback: this.addPlayer.bind(this),
-            cancelCallback: this.hideAddPlayer.bind(this) }),
+          { className: 'row' },
           _react2.default.createElement(
-            'button',
-            { id: 'addplayerbutton', onClick: function onClick(e) {
-                return _this5.showAddPlayer(e);
-              } },
-            'Add Player'
-          ),
-          ' ',
-          ' ',
-          _react2.default.createElement(_ReviewForm2.default, { players: this.state.players, onSubmit: function onSubmit(evt) {
-              return _this5.handleSubmit(evt);
-            } })
+            'div',
+            { className: 'twelve columns' },
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { className: 'home', to: '/' },
+              'HOME'
+            )
+          )
         ),
         _react2.default.createElement(
           'div',
-          { className: 'six columns' },
+          { className: 'row' },
           _react2.default.createElement(
-            'h1',
-            { className: 'page2-header' },
-            'Review a Match'
+            'div',
+            { className: 'six columns' },
+            this.state.addPlayerVisible && _react2.default.createElement(_PlayerForm2.default, { submitCallback: this.addPlayer.bind(this),
+              cancelCallback: this.hideAddPlayer.bind(this) }),
+            _react2.default.createElement(
+              'button',
+              { id: 'addplayerbutton', onClick: function onClick(e) {
+                  return _this5.showAddPlayer(e);
+                } },
+              'Add Player'
+            ),
+            ' ',
+            ' ',
+            _react2.default.createElement(_ReviewForm2.default, { players: this.state.players, onSubmit: function onSubmit(evt, review) {
+                return _this5.handleSubmit(evt, review);
+              } })
           ),
           _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/' },
-            'Home'
+            'div',
+            { className: 'six columns' },
+            _react2.default.createElement(
+              'h1',
+              { className: 'page2-header' },
+              'Review a Match'
+            )
           )
         )
       );
@@ -7748,12 +7764,7 @@ var ReviewForm = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (ReviewForm.__proto__ || Object.getPrototypeOf(ReviewForm)).call(this, props));
 
     _this.state = {
-      review: {
-        player_id: {},
-        opponent: {},
-        score: {},
-        content: {}
-      }
+      review: {}
     };
     return _this;
   }
@@ -7784,7 +7795,7 @@ var ReviewForm = function (_React$Component) {
       return _react2.default.createElement(
         'form',
         { className: 'main-form', onSubmit: function onSubmit(evt) {
-            return _this2.props.onSubmit(evt);
+            return _this2.props.onSubmit(evt, _this2.state.review);
           } },
         _react2.default.createElement(
           'select',
@@ -11478,6 +11489,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(38);
 
+var _history = __webpack_require__(237);
+
 var _Home = __webpack_require__(102);
 
 var _Home2 = _interopRequireDefault(_Home);
@@ -11544,7 +11557,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Home = function Home() {
   return _react2.default.createElement(
     'div',
-    { className: 'home' },
+    { className: 'home-page' },
     _react2.default.createElement(
       'h1',
       { className: 'main-heading' },
@@ -11604,15 +11617,7 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ReviewForm = __webpack_require__(66);
-
-var _ReviewForm2 = _interopRequireDefault(_ReviewForm);
-
 var _reactRouterDom = __webpack_require__(38);
-
-var _Reviews = __webpack_require__(40);
-
-var _Reviews2 = _interopRequireDefault(_Reviews);
 
 var _api = __webpack_require__(30);
 
@@ -11693,22 +11698,38 @@ var ReviewList = function (_React$Component) {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'div',
+        'span',
         null,
         _react2.default.createElement(
-          _reactRouterDom.Link,
-          { to: '/' },
-          'Home'
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'twelve columns' },
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { className: 'home', to: '/' },
+              'HOME'
+            )
+          )
         ),
         _react2.default.createElement(
-          'h1',
-          { className: 'page2-header' },
-          'Find a Review'
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          this.renderReviews()
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'twelve columns' },
+            _react2.default.createElement(
+              'h1',
+              { className: 'page2-header' },
+              'Find a Review'
+            ),
+            _react2.default.createElement(
+              'ul',
+              null,
+              this.renderReviews()
+            )
+          )
         )
       );
     }
@@ -27997,6 +28018,64 @@ var valueEqual = function valueEqual(a, b) {
 };
 
 exports.default = valueEqual;
+
+/***/ }),
+/* 237 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+exports.createPath = exports.parsePath = exports.locationsAreEqual = exports.createLocation = exports.createMemoryHistory = exports.createHashHistory = exports.createBrowserHistory = undefined;
+
+var _LocationUtils = __webpack_require__(42);
+
+Object.defineProperty(exports, 'createLocation', {
+  enumerable: true,
+  get: function get() {
+    return _LocationUtils.createLocation;
+  }
+});
+Object.defineProperty(exports, 'locationsAreEqual', {
+  enumerable: true,
+  get: function get() {
+    return _LocationUtils.locationsAreEqual;
+  }
+});
+
+var _PathUtils = __webpack_require__(25);
+
+Object.defineProperty(exports, 'parsePath', {
+  enumerable: true,
+  get: function get() {
+    return _PathUtils.parsePath;
+  }
+});
+Object.defineProperty(exports, 'createPath', {
+  enumerable: true,
+  get: function get() {
+    return _PathUtils.createPath;
+  }
+});
+
+var _createBrowserHistory2 = __webpack_require__(120);
+
+var _createBrowserHistory3 = _interopRequireDefault(_createBrowserHistory2);
+
+var _createHashHistory2 = __webpack_require__(121);
+
+var _createHashHistory3 = _interopRequireDefault(_createHashHistory2);
+
+var _createMemoryHistory2 = __webpack_require__(122);
+
+var _createMemoryHistory3 = _interopRequireDefault(_createMemoryHistory2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.createBrowserHistory = _createBrowserHistory3.default;
+exports.createHashHistory = _createHashHistory3.default;
+exports.createMemoryHistory = _createMemoryHistory3.default;
 
 /***/ })
 /******/ ]);

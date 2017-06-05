@@ -12,18 +12,21 @@ module.exports = {
 }
 
 function getReviews(callback) {
+  console.log("get reviews");
   request
     .get(reviewUrl)
     .end(function (err, res) {
       if (err) {
         callback(err)
       } else {
+        console.log("got reviews", res.body);
         callback(null, res.body)
       }
     })
 }
 
 function addReview(review, callback) {
+  console.log("add review", {review});
   request
   .post(reviewUrl)
   .send(review)

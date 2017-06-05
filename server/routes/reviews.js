@@ -4,6 +4,7 @@ const router = express.Router()
 const db = require('../db')
 
 router.get('/', (req, res) => {
+  console.log("get reviews");
   db.getReviews(req.app.get('db'))
     .then(reviews => {
       res.json(reviews)
@@ -14,6 +15,7 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
+  console.log("post review", req.body);
   db.addReview(req.body, req.app.get('db'))
     .then(result => {
       console.log({result});
