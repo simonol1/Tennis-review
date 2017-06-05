@@ -3,7 +3,7 @@ import React from 'react'
 import api from '../api'
 import PlayerForm from './PlayerForm'
 
-export default ReviewForm = (props) => {
+export default class ReviewForm extends React.Component {
 
     renderPlayerOptions(players) {
       return players.map((player,i) => {

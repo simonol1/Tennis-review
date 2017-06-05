@@ -2,31 +2,35 @@ import React from 'react'
 
 import api from '../api'
 
-export default PlayerForm = (props) => {
+export default class PlayerForm extends React.Component {
 
-  handleSubmit(evt) {
-    evt.preventDefault()
-    api.addPlayer(this.state.player, (err, player) => {
-      window.location.reload(true)
+  showAddPlayer () {
+    this.setState({
+      addPlayerVisible: true
     })
   }
 
-  handleChange(evt) {
-    let player = {...this.state.player}
-      player[evt.target.name] = evt.target.value
-      this.setState({player})
+  addPlayer(player) {
+    api.addPlayer (player, (error) => {
+      error ? this.setState({error}) : this.refreshForm()
+    })
+  }
+
+  hideAddPlayer () {
+    this.setState({ addPlayerVisible: false})
   }
 
   render () {
     return (
       <div className="add-player">
-        <form className = 'player-form' onSubmit={(evt) => this.handleSubmit(evt)}>
-             <input type='text' id='column'name='name' placeholder='Name' onChange={this.handleChange.bind(this)}/>
-             <input type='text' id='column'name='email' placeholder='Email' onChange={this.handleChange.bind(this)}/>
-             <input type='text' id='column'name='mobile' placeholder='Mobile' onChange={this.handleChange.bind(this)}/>
+        <form className = 'player-form'>
+             <input type='text' id='column'name='name' placeholder='Name' />
+             <input type='text' id='column'name='email' placeholder='Email'>
+             <input type='text' id='column'name='mobile' placeholder='Mobile' />
              <input type='submit' id='submit' value='Submit'/>
              <a href="#" id='cancelplayer' onClick={this.props.cancelCallback}>Cancel</a>
         </form>
     </div>
-  )}
+  )
+ }
 }

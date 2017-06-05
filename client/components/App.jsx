@@ -3,8 +3,10 @@ import {HashRouter as Router, Route} from 'react-router-dom'
 import { createHashHistory } from 'history';
 
 import Home from './Home'
-import Reviews from './Reviews'
-import ReviewList from './ReviewList'
+import Reviews from '../containers/Reviews'
+import ReviewList from '../containers/ReviewList'
+import Header from './Header'
+import Footer from './Footer'
 
 
 const App = () => {
@@ -17,17 +19,9 @@ const App = () => {
         <Route exact path='/reviews' className='reviews' component={Reviews}/>
         <Route exact path='/reviewlist' component={ReviewList}/>
       </div>
-    <Footer?>
+    <Footer/>
     </Router>
   )
 }
 
-
-function mapStateToProps(state) {
-  console.log(state);
-  return {
-    props:props.state
-  }
-}
-
-export default connect(mapStateToProps)(App)
+export default App

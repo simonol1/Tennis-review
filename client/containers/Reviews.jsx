@@ -1,51 +1,27 @@
 import React from 'react'
-
-import ReviewForm from './ReviewForm'
-import PlayerForm from './PlayerForm'
 import {Link} from 'react-router-dom'
 
-import api from '../api'
+import ReviewForm from '../components/ReviewForm'
+import PlayerForm from '../components/PlayerForm'
+import addReview from '../action-creators/AddReview'
+import addPlayer from '../action-creators/AddPlayer'
+import getPlayers from '../action-creators/GetPlayers'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 
-export default class Reviews extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      players: [],
-      addPlayerVisible: false
-    }
-  }
-
+class Reviews extends React.Component {
   componentDidMount() {
-    api.getReviews((err, reviews) => {
-      api.getPlayers((err, players) => {
-        this.setState({players, reviews})
-      })
-    })
- }
-
-  showAddPlayer () {
-    this.setState({
-      addPlayerVisible: true
-    })
-  }
-
-  addPlayer(player) {
-    api.addPlayer (player, (error) => {
-      error ? this.setState({error}) : this.refreshForm()
-    })
-  }
-  hideAddPlayer () {
-    this.setState({ addPlayerVisible: false})
+    this.props.dispatch(addReview())
+    this.props.dispatch(addPlayer())
+    this.props.dispatch(getPlayers())
   }
 
   handleSubmit(evt, review) {
     evt.preventDefault()
-    console.log("submitting review");
     api.addReview(review, (err, response) => {
       this.props.history.push('/reviewlist')
-      // window.location.reload(true)
-      console.log({response});
+      window.location.reload(true)
     })
   }
 
@@ -55,6 +31,7 @@ render () {
     <div className="row">
       <div className="twelve columns">
         <Link className='home' to='/'>HOME</Link>
+        <Header/>
       </div>
     </div>
         <div className="row">
@@ -65,9 +42,9 @@ render () {
           <ReviewForm players={this.state.players} onChange={this.handleChange.bind(this)} onSubmit={(evt, review) => this.handleSubmit(evt, review)}/>
        </div>
       <div className="six columns">
-        <h1 className='page2-header'>Review a Match</h1>
       </div>
    </div>
+   <Footer/>
  </span>
   )}
 }
@@ -75,8 +52,8 @@ render () {
 function mapStateToProps(state) {
   console.log(state);
   return {
-    props:props.state
+
   }
 }
 
-export default connect(mapStateToProps)(ReviewList)
+export default connect(mapStateToProps)(Reviews)
