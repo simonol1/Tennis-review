@@ -22,15 +22,13 @@ export default class PlayerForm extends React.Component {
 
   render () {
     return (
-      <div className="add-player">
-        <form className = 'player-form'>
-             <input type='text' id='column'name='name' placeholder='Name' />
-             <input type='text' id='column'name='email' placeholder='Email'>
-             <input type='text' id='column'name='mobile' placeholder='Mobile' />
-             <input type='submit' id='submit' value='Submit'/>
-             <a href="#" id='cancelplayer' onClick={this.props.cancelCallback}>Cancel</a>
-        </form>
-    </div>
-  )
- }
+      <form className='player-form'>
+        <input type='text' id='column' name='name' placeholder='Name' />
+        <input type='text' id='column' name='email' placeholder='Email' />
+        <input type='text' id='column' name='mobile' placeholder='Mobile' />
+        <input type='submit' id='submit' value='Submit'/>
+        <a href="#" id='cancelplayer' onClick={this.props.cancelCallback}>Cancel</a>
+      </form>
+    )
+  }
 }

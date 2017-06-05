@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import ReviewForm from '../components/ReviewForm'
 import PlayerForm from '../components/PlayerForm'
