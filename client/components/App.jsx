@@ -7,6 +7,7 @@ import Reviews from '../containers/Reviews'
 import ReviewList from '../containers/ReviewList'
 import Header from './Header'
 import Footer from './Footer'
+import Nav from './Nav'
 
 
 const App = () => {
@@ -18,8 +19,8 @@ const App = () => {
         <Route path='/' exact={true} component={Home}/>
         <Route exact path='/reviews' className='reviews' component={Reviews}/>
         <Route exact path='/reviewlist' component={ReviewList}/>
+        <Footer/>
       </div>
-    <Footer/>
     </Router>
   )
 }

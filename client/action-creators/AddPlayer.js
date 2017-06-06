@@ -7,6 +7,17 @@ export const addPlayerAction = (player) => {
   }
 }
 
+// export const updateNewPlayerDetailsAction = (field, value) => {
+//   return (dispatch) => {
+//     let action = {
+//       type: 'UPDATE_NEW_PLAYER_DETAILS',
+//       field,
+//       value
+//     }
+//     dispatch(action)
+//   }
+// }
+
 export function addPlayer (player) {
   return (dispatch) => {
     request
@@ -19,7 +30,7 @@ export function addPlayer (player) {
         }
         //res.body should be player id, so....
         player.id = res.body
-        dispatch(addPlayer(player))
+        dispatch(addPlayerAction(player))
       })
   }
 }
