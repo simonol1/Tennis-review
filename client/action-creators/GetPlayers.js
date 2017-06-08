@@ -1,13 +1,15 @@
 import request from 'superagent'
 
-export const getPlayersAction = (players) => {
+//doesn't need to be exported
+const getPlayersAction = (players) => {
   return {
     type: 'GET_PLAYERS_ACTION',
     players
   }
 }
 
-export function getPlayers () {
+//export default
+export default function getPlayers () {
   return (dispatch) => {
     request
       .get(`/api/v1/players`)
@@ -16,7 +18,7 @@ export function getPlayers () {
           console.error(err.message)
           return
         }
-        dispatch(getPlayers(res.body))
+        dispatch(getPlayersAction(res.body))
       })
   }
 }

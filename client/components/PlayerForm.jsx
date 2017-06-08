@@ -7,7 +7,6 @@ class PlayerForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      dispatch: props.dispatch,
       newPlayerDetails: {}
     }
   }
@@ -15,11 +14,11 @@ class PlayerForm extends React.Component {
     let player = this.state.newPlayerDetails
     player[e.target.name] = e.target.value
     this.setState({newPlayerDetails: player})
-    // this.state.dispatch(updateNewPlayerDetailsAction(e.target.name, e.target.value))
+    // this.props.dispatch(updateNewPlayerDetailsAction(e.target.name, e.target.value))
   }
   submitPlayer(e) {
     e.preventDefault()
-    this.state.dispatch(addPlayer(this.state.newPlayerDetails))
+    this.props.dispatch(addPlayer(this.state.newPlayerDetails))
   }
   render () {
     return (
