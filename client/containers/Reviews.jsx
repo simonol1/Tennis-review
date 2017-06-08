@@ -4,11 +4,12 @@ import { connect } from 'react-redux'
 
 import ReviewForm from '../components/ReviewForm'
 import PlayerForm from '../components/PlayerForm'
-import addReview from '../action-creators/AddReview'
-import addPlayer from '../action-creators/AddPlayer'
-import {getPlayers} from '../action-creators/GetPlayers'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+
+import addReview from '../action-creators/AddReview'
+import addPlayer from '../action-creators/AddPlayer'
+import getPlayers from '../action-creators/GetPlayers'
 
 
 class Reviews extends React.Component {

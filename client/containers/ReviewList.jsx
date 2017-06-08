@@ -19,27 +19,22 @@ renderReview(review) {
   </li>
 }
 
-renderReviews() {
-  return this.state.reviews.map(this.renderReview)
-}
-
 render () {
   return (
     <span>
     <Header/>
         <ul>
-          {this.renderReviews()}
+          {this.state.reviews.map(this.renderReview)}
         </ul>
     <Footer/>
 </span>
   )}
 }
 
-function mapStateToProps(dispatch, ownProps) {
+//a bit more complex than needed
+function mapStateToProps(state) {
   return {
-     getReviews: () => {
-       dispatch(getReviews())
-     }
+    reviews: state.reviews
   }
 }
 
